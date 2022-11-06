@@ -60,6 +60,9 @@ body .iphone #buttonHolder ._button {
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
 }
+body .iphone #buttonHolder .highlighted {
+  background-color: brown !important;
+}
 body .iphone #buttonHolder .lightGrayB {
   background-color: #A5A5A5;
 }
@@ -68,6 +71,9 @@ body .iphone #buttonHolder .goldB {
 }
 body .iphone #buttonHolder .grayB {
   background-color: #343434;
+}
+body .iphone #buttonHolder .darkText {
+  color: black;
 }
 body .iphone #buttonHolder .longButtonZero {
   grid-area: 5/1/5/3;
@@ -81,7 +87,7 @@ body .iphone .footer {
 }
 body .iphone .footer .img {
   width: 120px;
-  height: 30px;
+  height: 6px;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -14,6 +14,7 @@ $nums_color: #343434;
 $text_color: #FBFBFB;
 $action_color: #FEA233;
 $upper_buttons_color: #A5A5A5;
+$goldHighlight_color: brown;
 
 $button_size: 80px;
 $font_size: 30px;
@@ -73,6 +74,9 @@ body{
         -webkit-border-radius: calc($button_size / 2);
         -moz-border-radius: calc($button_size / 2);
       }
+      .highlighted{
+        background-color: $goldHighlight_color !important;
+      }
       .lightGrayB{
         background-color: $upper_buttons_color;
       }
@@ -81,6 +85,9 @@ body{
       }
       .grayB{
         background-color: $nums_color;
+      }
+      .darkText{
+        color: black;
       }
       .longButtonZero{
         grid-area: 5/1/5/3;
@@ -95,7 +102,7 @@ body{
 
       .img{
         width: 120px;
-        height: 30px;
+        height: 6px;
       }
     }
   }
