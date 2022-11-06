@@ -5,5 +5,14 @@
 }
 
 body{
-  background-color: teal;
+  height: 100%;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .iphone{
+    width: 390px;
+    height: 844px;
+    background-color: black;
+  }
 }
