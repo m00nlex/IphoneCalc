@@ -4,15 +4,77 @@
   box-sizing: border-box;
 }
 
+$nums_color: #343434;
+$text_color: #FBFBFB;
+$action_color: #FEA233;
+$upper_buttons_color: #A5A5A5;
+
+$button_size: 80px;
+$font_size: 30px;
+$button_gap: 10px;
+
 body{
   height: 100%;
-  background-color: red;
+  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 20px;
+  color: $text_color;
+  font-size: $font_size;
+  font-family: "system-ui";
   .iphone{
     width: 390px;
     height: 844px;
     background-color: black;
+    padding: 5px 15px;
+    .header{
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-size: 16px;
+      #time{
+
+      }
+    }
+    #input{
+      height: 30%;
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: end;
+    }
+    #buttonHeader{
+      display: grid;
+      grid-template: repeat(5, $button_size) / repeat(4, $button_size);
+      justify-items: center;
+      grid-gap: $button_gap;
+      justify-content: center;
+      ._button{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $button_size;
+        height: $button_size;
+        border-radius: calc($button_size / 2);
+        -webkit-border-radius: calc($button_size / 2);
+        -moz-border-radius: calc($button_size / 2);
+      }
+      .lightGrayB{
+        background-color: $upper_buttons_color;
+      }
+      .goldB{
+        background-color: $action_color;
+      }
+      .grayB{
+        background-color: $nums_color;
+      }
+      .longButtonZero{
+        grid-area: 5/1/5/3;
+        width: calc($button_size*2 + $button_gap);
+      }
+    }
+    .footer{
+
+    }
   }
 }

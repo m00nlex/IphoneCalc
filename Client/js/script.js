@@ -1,1 +1,1 @@
-console.log("Script.js is started . . . ")
+console.log("Script.js is started now. . . ")
