@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 body {
@@ -20,6 +25,8 @@ body .iphone {
   height: 844px;
   background-color: black;
   padding: 5px 15px;
+  display: flex;
+  flex-direction: column;
 }
 body .iphone .header {
   display: flex;
@@ -32,15 +39,18 @@ body .iphone #input {
   display: flex;
   flex-direction: row-reverse;
   align-items: end;
+  font-size: 60px;
+  padding-right: 30px;
+  padding-bottom: 10px;
 }
-body .iphone #buttonHeader {
+body .iphone #buttonHolder {
   display: grid;
   grid-template: repeat(5, 80px)/repeat(4, 80px);
   justify-items: center;
   grid-gap: 10px;
   justify-content: center;
 }
-body .iphone #buttonHeader ._button {
+body .iphone #buttonHolder ._button {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,18 +60,28 @@ body .iphone #buttonHeader ._button {
   -webkit-border-radius: 40px;
   -moz-border-radius: 40px;
 }
-body .iphone #buttonHeader .lightGrayB {
+body .iphone #buttonHolder .lightGrayB {
   background-color: #A5A5A5;
 }
-body .iphone #buttonHeader .goldB {
+body .iphone #buttonHolder .goldB {
   background-color: #FEA233;
 }
-body .iphone #buttonHeader .grayB {
+body .iphone #buttonHolder .grayB {
   background-color: #343434;
 }
-body .iphone #buttonHeader .longButtonZero {
+body .iphone #buttonHolder .longButtonZero {
   grid-area: 5/1/5/3;
   width: 170px;
+}
+body .iphone .footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: auto;
+}
+body .iphone .footer .img {
+  width: 120px;
+  height: 30px;
 }
 
 /*# sourceMappingURL=style.css.map */

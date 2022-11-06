@@ -2,6 +2,12 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+  -o-user-select: none;
 }
 
 $nums_color: #343434;
@@ -23,11 +29,15 @@ body{
   color: $text_color;
   font-size: $font_size;
   font-family: "system-ui";
+
   .iphone{
     width: 390px;
     height: 844px;
     background-color: black;
     padding: 5px 15px;
+    display: flex;
+    flex-direction: column;
+
     .header{
       display: flex;
       flex-direction: row;
@@ -42,13 +52,17 @@ body{
       display: flex;
       flex-direction: row-reverse;
       align-items: end;
+      font-size: 60px;
+      padding-right: calc($button_size/2 - $button_gap);
+      padding-bottom: $button_gap;
     }
-    #buttonHeader{
+    #buttonHolder{
       display: grid;
       grid-template: repeat(5, $button_size) / repeat(4, $button_size);
       justify-items: center;
       grid-gap: $button_gap;
       justify-content: center;
+
       ._button{
         display: flex;
         justify-content: center;
@@ -74,7 +88,15 @@ body{
       }
     }
     .footer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: auto;
 
+      .img{
+        width: 120px;
+        height: 30px;
+      }
     }
   }
 }
