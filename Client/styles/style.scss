@@ -92,6 +92,8 @@ body{
       .longButtonZero{
         grid-area: 5/1/5/3;
         width: calc($button_size*2 + $button_gap);
+        justify-content: flex-start;
+        padding-left: calc($button_size/2 - $button_gap);
       }
     }
     .footer{

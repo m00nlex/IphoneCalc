@@ -78,6 +78,8 @@ body .iphone #buttonHolder .darkText {
 body .iphone #buttonHolder .longButtonZero {
   grid-area: 5/1/5/3;
   width: 170px;
+  justify-content: flex-start;
+  padding-left: 30px;
 }
 body .iphone .footer {
   display: flex;
