@@ -1,10 +1,13 @@
-let curValue = '0';
-let memValue = '0';
+let curValue = 0;
+let memValue = 0;
+let actionId;
+let longHighlightObj = 0;
+let numNum = 1;
 
 function upTime(){
     let now = new Date();
     document.getElementById('time').innerHTML = (now.getHours() / 10 >= 1 ? now.getHours() : '0' + now.getHours()) + ":" + (now.getMinutes() / 10 >= 1 ? now.getMinutes() : '0' + now.getMinutes());
-    setTimeout(upTime, 1000);
+    setTimeout(upTime, 3000);
 }
 upTime()
 
@@ -13,38 +16,104 @@ function update(value){
     document.getElementById('input').innerHTML = curValue;
 }
 
-function highlight(target){
+function clear(){
+    document.getElementById('input').innerHTML = '0';
+    numNum = 1;
+    curValue = 0;
+}
+
+function makeSum(){
+    switch (actionId){
+        case 'button4':
+            update(+memValue / +curValue)
+            break;
+        case 'button8':
+            update(+memValue * +curValue)
+            break;
+        case 'button12':
+            update(+memValue - +curValue)
+            break;
+        case 'button16':
+            update(+memValue + +curValue)
+            break;
+    }
+}
+
+function highlightOn(target){
+    longHighlightObj = target;
     target.classList.add('highlighted')
+}
+function highlightOff(){
+    if(longHighlightObj !== 0 ){
+        longHighlightObj.classList.remove('highlighted')
+        longHighlightObj = 0;
+    }
 }
 
 document.getElementById('buttonHolder').onclick = function(event){
     let target = event.target;
 
-    if(target.classList.contains('grayB')){
-        if(target.id === 'button18'){ // comma
-            if(curValue.toString() === '0'){
-                update('0,')
-            } else if(!curValue.toString().includes(',')) {
-                update(curValue.toString() + ',')
+    if(target.classList.contains('grayB')){ // num or comma
+        if(numNum < 9){
+            highlightOff()
+            if(target.id === 'button18'){ // comma
+                if(curValue.toString() === '0'){
+                    update('0,')
+                } else if(!curValue.toString().includes(',')) {
+                    update(curValue.toString() + ',')
+                }
+            } else { //num
+                // if (actionId && longHighlightObj){ // есть активное подсвеченное действие
+                //
+                // } else {
+                    if(curValue === 0){
+                        update(target.innerHTML)
+                    } else {
+                        update(curValue + target.innerHTML)
+                        numNum++;
+                    }
+                // }
             }
-        } else {
-            if(curValue === '0'){
-                update(target.innerHTML)
-            } else {
-                update(curValue + target.innerHTML)
-            }
+        }
+    }
+    else if (target.classList.contains('lightGrayB')){
+        if (target.id === 'button1') { // AC
+            actionId = false;
+            highlightOff()
+            numNum = 1;
+            clear()
+        }
+        else if (target.id === 'button2'){ // +/-
+            update(-curValue)
+        }
+        else if (target.id === 'button3'){ // %
+            update(+curValue/100)
         }
     }
 
     else if (target.classList.contains('goldB')) {
-        if (target.id === 'button19'){
-
-        } else {
-            memValue = curValue;
-            update('0')
-            highlight(target)
-
+        if (target.id === 'button19'){ // =
+            makeSum()
+            highlightOff()
+            actionId = false;
+        } else { // * / + -
+            if (actionId){ //уже есть нажатое действие
+                if(longHighlightObj){ // действие еще неактивно, так как подсвечено
+                    highlightOff()
+                    highlightOn(target)
+                } else { //действие активно, уже что-то набрано
+                    makeSum()
+                    highlightOff() //переключение подсветки
+                    highlightOn(target)
+                }
+                actionId(target.id) //обозначить смену действия
+            } else { // нажатого действия нет
+                actionId = target.id; //запомнить нажатое действие
+                memValue = curValue; //запомнить значение, т.к после оно сотрется
+                curValue = 0; //стереть значение, но не обновлять иннер
+                numNum = 1; //обновить счетчик цифр
+                highlightOn(target)
+            }
         }
     }
-    console.log("CLICK!")
 }

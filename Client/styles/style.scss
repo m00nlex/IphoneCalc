@@ -14,7 +14,6 @@ $nums_color: #343434;
 $text_color: #FBFBFB;
 $action_color: #FEA233;
 $upper_buttons_color: #A5A5A5;
-$goldHighlight_color: brown;
 
 $button_size: 80px;
 $font_size: 30px;
@@ -75,7 +74,8 @@ body{
         -moz-border-radius: calc($button_size / 2);
       }
       .highlighted{
-        background-color: $goldHighlight_color !important;
+        background-color: $text_color !important;
+        color: $action_color !important;
       }
       .lightGrayB{
         background-color: $upper_buttons_color;

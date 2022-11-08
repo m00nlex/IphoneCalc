@@ -61,7 +61,8 @@ body .iphone #buttonHolder ._button {
   -moz-border-radius: 40px;
 }
 body .iphone #buttonHolder .highlighted {
-  background-color: brown !important;
+  background-color: #FBFBFB !important;
+  color: #FEA233 !important;
 }
 body .iphone #buttonHolder .lightGrayB {
   background-color: #A5A5A5;
