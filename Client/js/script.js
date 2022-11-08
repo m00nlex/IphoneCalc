@@ -3,6 +3,7 @@ let memValue = 0;
 let actionId;
 let longHighlightObj = 0;
 let numNum = 1;
+let res = 0;
 
 function upTime(){
     let now = new Date();
@@ -22,20 +23,33 @@ function clear(){
     curValue = 0;
 }
 
-function makeSum(){
+function makeSum(...props){
+    res = 0;
+    actionId = actionId || props;
+    console.log(actionId)
     switch (actionId){
         case 'button4':
-            update(+memValue / +curValue)
+            res = +memValue / +curValue
             break;
         case 'button8':
-            update(+memValue * +curValue)
+            res = +memValue * +curValue
             break;
         case 'button12':
-            update(+memValue - +curValue)
+            res = +memValue - +curValue
             break;
         case 'button16':
-            update(+memValue + +curValue)
+            res = +memValue + +curValue
             break;
+    }
+    if(isNaN(res)) {
+        update("Ошибка")
+    } else if (!isFinite(res)){
+        update("∞")
+    } else {
+        if (res.toString().length > 9){
+             res = 'Ошибка'
+        }
+        update(res)
     }
 }
 
@@ -58,21 +72,22 @@ document.getElementById('buttonHolder').onclick = function(event){
             highlightOff()
             if(target.id === 'button18'){ // comma
                 if(curValue.toString() === '0'){
-                    update('0,')
-                } else if(!curValue.toString().includes(',')) {
-                    update(curValue.toString() + ',')
+                    update('0.')
+                } else if(!curValue.toString().includes('.')) {
+                    update(curValue.toString() + '.')
                 }
             } else { //num
-                // if (actionId && longHighlightObj){ // есть активное подсвеченное действие
-                //
-                // } else {
+                if (actionId && longHighlightObj){ // есть активное подсвеченное действие
+                    memValue = curValue;
+                    update(target.innerHTML)
+                } else {
                     if(curValue === 0){
                         update(target.innerHTML)
                     } else {
                         update(curValue + target.innerHTML)
                         numNum++;
                     }
-                // }
+                }
             }
         }
     }
@@ -95,7 +110,7 @@ document.getElementById('buttonHolder').onclick = function(event){
         if (target.id === 'button19'){ // =
             makeSum()
             highlightOff()
-            actionId = false;
+            actionId = false; //удалить активное действие
         } else { // * / + -
             if (actionId){ //уже есть нажатое действие
                 if(longHighlightObj){ // действие еще неактивно, так как подсвечено
@@ -103,10 +118,13 @@ document.getElementById('buttonHolder').onclick = function(event){
                     highlightOn(target)
                 } else { //действие активно, уже что-то набрано
                     makeSum()
+                    memValue = curValue; //запоминаем значение, чтобы стереть для ввода нового числа
+                    curValue = 0;
+                    numNum = 1;
                     highlightOff() //переключение подсветки
                     highlightOn(target)
                 }
-                actionId(target.id) //обозначить смену действия
+                actionId = target.id //обозначить смену действия
             } else { // нажатого действия нет
                 actionId = target.id; //запомнить нажатое действие
                 memValue = curValue; //запомнить значение, т.к после оно сотрется
