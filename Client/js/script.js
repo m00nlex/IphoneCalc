@@ -12,9 +12,24 @@ function upTime(){
 }
 upTime()
 
+function filter(numberEx){
+    // for (let i =  value.toString().length; i>=0; i--){
+    //     // 56767890053 len = 11, view = 5676789e4
+    //     console.log(value.toString()[i])
+    // }
+    _eNum = (+numberEx).toExponential(5).toString().split('e') //_enum [0] = 5.676789 , [1] = +10
+    if (+_eNum[1] >= 5){ //more than 6 zeros in e
+        _eNum[0] = +_eNum[0] * Math.pow(10, 5);
+        _eNum[1] -= 5;
+        numberEx = _eNum[0].toString() + 'e' + _eNum[1].toString();
+    }
+
+    return numberEx;
+}
+
 function update(value){
     curValue = value;
-    document.getElementById('input').innerHTML = curValue;
+    document.getElementById('input').innerHTML = filter(curValue);
 }
 
 function clear(){
@@ -26,7 +41,6 @@ function clear(){
 function makeSum(...props){
     res = 0;
     actionId = actionId || props;
-    console.log(actionId)
     switch (actionId){
         case 'button4':
             res = +memValue / +curValue
